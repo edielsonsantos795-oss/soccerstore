@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SoccerStore Global</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:#fff}
+.menu{position:fixed;width:230px;height:100%;background:#020617;padding:15px}
+.menu h2{color:#22c55e}
+.menu button{width:100%;margin-top:10px;padding:10px;background:#1e293b;color:#fff;border:none}
+
+.content{margin-left:240px;padding:20px}
+
+.sec{display:none}
+.active{display:block}
+
+.card{background:#1e293b;padding:15px;margin-top:10px;border-radius:8px}
+
+.table{width:100%;margin-top:10px;border-collapse:collapse}
+.table td{padding:8px;border-bottom:1px solid #333}
+</style>
+
+</head>
+
+<body>
+
+<div class="menu">
+<h2>⚽ Global Store</h2>
+<button onclick="show('dash')">Dashboard</button>
+<button onclick="show('sales')">Sales</button>
+<button onclick="show('clients')">Clients</button>
+<button onclick="show('shipping')">Shipping</button>
+</div>
+
+<div class="content">
+
+<div id="dash" class="sec active">
+<h1>📊 Dashboard</h1>
+<div class="card">💰 Revenue: $128,450</div>
+<div class="card">🛒 Orders: 842</div>
+<div class="card">🌎 Top Market: USA</div>
+</div>
+
+<div id="sales" class="sec">
+<h1>💰 Sales (USD)</h1>
+<table class="table">
+<tr><td>Brazil Jersey</td><td>$79</td></tr>
+<tr><td>Real Madrid Jersey</td><td>$89</td></tr>
+<tr><td>Nike Boots</td><td>$120</td></tr>
+<tr><td>Adidas Boots</td><td>$110</td></tr>
+</table>
+</div>
+
+<div id="clients" class="sec">
+<h1>👤 Clients</h1>
+<table class="table">
+<tr><td>John Smith</td><td>USA</td></tr>
+<tr><td>Michael Brown</td><td>UK</td></tr>
+<tr><td>Carlos Silva</td><td>Brazil</td></tr>
+<tr><td>Pedro Garcia</td><td>Spain</td></tr>
+</table>
+</div>
+
+<div id="shipping" class="sec">
+<h1>📦 Shipping</h1>
+<table class="table">
+<tr><td>#1001</td><td>Delivered - USA</td></tr>
+<tr><td>#1002</td><td>In Transit - UK</td></tr>
+<tr><td>#1003</td><td>Processing - Brazil</td></tr>
+<tr><td>#1004</td><td>Delivered - Spain</td></tr>
+</table>
+</div>
+
+</div>
+
+<script>
+function show(id){
+document.querySelectorAll(".sec").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+</script>
+
+</body>
+</html>
