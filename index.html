@@ -1,1 +1,126 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Sports Pro</title>
+
+<style>
+body {margin:0;font-family:Arial;background:#0a0a0a;color:#fff;}
+header {background:#000;padding:15px;text-align:center;font-size:22px;}
+nav {display:flex;gap:10px;justify-content:center;background:#111;padding:10px;}
+nav button {padding:10px;background:#222;color:#fff;border:none;cursor:pointer;}
+section {display:none;padding:20px;}
+.active {display:block;}
+.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+.card {background:#1a1a1a;padding:10px;border-radius:10px;text-align:center;}
+.card img {width:100%;height:160px;object-fit:cover;}
+</style>
+
+</head>
+
+<body>
+
+<header>🔥 ELITE SPORTS PRO</header>
+
+<nav>
+<button onclick="show('produtos')">Produtos</button>
+<button onclick="show('pedidos')">Pedidos</button>
+<button onclick="show('envios')">Envios</button>
+<button onclick="show('clientes')">Clientes</button>
+<button onclick="show('faturamento')">Faturamento</button>
+</nav>
+
+<section id="produtos" class="active">
+<h2>Produtos</h2>
+<div class="grid" id="produtosGrid"></div>
+</section>
+
+<section id="pedidos">
+<h2>Pedidos</h2>
+<ul id="listaPedidos"></ul>
+</section>
+
+<section id="envios">
+<h2>Envios</h2>
+<ul id="listaEnvios"></ul>
+</section>
+
+<section id="clientes">
+<h2>Clientes</h2>
+<ul id="listaClientes"></ul>
+</section>
+
+<section id="faturamento">
+<h2>Faturamento</h2>
+<p>Total: $<span id="totalFaturamento">0</span></p>
+</section>
+
+<script>
+
+function show(sec){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(sec).classList.add("active");
+}
+
+// PRODUTOS REAIS
+const produtos = [
+{nome:"Camisa PSG 23/24",preco:89,img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519"},
+{nome:"Camisa Real Madrid",preco:95,img:"https://images.unsplash.com/photo-1599058917765-a780eda07a3e"},
+{nome:"Camisa Barcelona",preco:92,img:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990"},
+{nome:"Chuteira Nike Mercurial",preco:150,img:"https://images.unsplash.com/photo-1600180758890-6c96d1c45ecf"},
+{nome:"Chuteira Adidas Predator",preco:140,img:"https://images.unsplash.com/photo-1589187155475-76b0b8d7bda5"}
+];
+
+// gerar vários produtos
+for(let i=0;i<30;i++){
+produtos.push({
+nome:"Item Premium "+i,
+preco:80+i,
+img:"https://picsum.photos/300?random="+i
+});
+}
+
+// RENDER PRODUTOS
+let html="";
+produtos.forEach(p=>{
+html+=`
+<div class="card">
+<img src="${p.img}">
+<h4>${p.nome}</h4>
+<p>$${p.preco}</p>
+</div>`;
+});
+document.getElementById("produtosGrid").innerHTML=html;
+
+// DADOS PROFISSIONAIS
+const clientes = ["John USA","Carlos BR","Miguel ES","Lucas FR","Anna DE","Yuki JP"];
+
+let pedidos = [];
+let faturamento = 0;
+
+// gerar pedidos automáticos
+for(let i=1;i<=25;i++){
+let cliente = clientes[Math.floor(Math.random()*clientes.length)];
+let valor = Math.floor(Math.random()*200)+50;
+let status = ["Pago","Enviado","Entregue"][Math.floor(Math.random()*3)];
+
+pedidos.push({cliente,valor,status});
+faturamento += valor;
+
+document.getElementById("listaPedidos").innerHTML += `<li>${cliente} - $${valor} - ${status}</li>`;
+
+if(status !== "Pago"){
+document.getElementById("listaEnvios").innerHTML += `<li>${cliente} - envio ${status}</li>`;
+}
+
+document.getElementById("listaClientes").innerHTML += `<li>${cliente}</li>`;
+}
+
+document.getElementById("totalFaturamento").innerText = faturamento;
+
+</script>
+
+</body>
+</html>
